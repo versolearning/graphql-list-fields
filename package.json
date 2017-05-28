@@ -1,24 +1,20 @@
 {
-  "name": "graphql-list-fields",
+  "name": "graphql-list-fields-verso",
+  "repository": "versolearning/graphql-list-fields",
   "version": "1.1.0",
   "description": "Get a list of fields while resolving a GraphQL query",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "jest",
     "coverage": "jest --coverage",
     "test-ci": "npm run coverage && cat ./coverage/lcov.info | coveralls",
-    "test-watch": "jest --watch"
+    "test-watch": "jest --watch",
+    "clean": "rm -rf lib",
+    "build": "npm run clean && ./node_modules/babel-cli/bin/babel.js -s inline -d lib src",
+    "prepublish": "npm run build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jakepusateri/graphql-list-fields.git"
-  },
-  "author": "jakepusateri",
+  "author": "Phuc Nguyen <npm@phucnguyen.info>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jakepusateri/graphql-list-fields/issues"
-  },
-  "homepage": "https://github.com/jakepusateri/graphql-list-fields#readme",
   "keywords": [
     "ast",
     "schema",
@@ -30,7 +26,18 @@
   "devDependencies": {
     "coveralls": "^2.11.14",
     "graphql": "^0.8.1",
-    "jest": "^16.0.1"
+    "jest": "^16.0.1",
+    "babel": "^6.3.13",
+    "babel-cli": "^6.3.15",
+    "babel-preset-es2015": "^6.3.13"
   },
-  "files": []
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+  "files": [],
+  "dependencies": {
+    "underscore": "^1.8.3"
+  }
 }

@@ -1,2 +1,6 @@
 node_modules
 coverage
+build
+lib
+npm-debug.log
+.vscode
