@@ -1,3 +1,5 @@
+import _ from 'underscore'
+
 function getBooleanArgumentValue(context, ast) {
     const argument = ast.arguments[0].value;
     switch (argument.kind) {
@@ -46,6 +48,10 @@ function getFieldSet(context, asts = context.fieldASTs || context.fieldNodes, pr
         switch (ast.kind) {
             case 'Field':
                 const newPrefix = dotConcat(prefix, ast.name.value);
+
+                if (newPrefix.includes('__typename'))
+                    return set;
+
                 if (ast.selectionSet) {
                     return Object.assign({}, set, getFieldSet(context, ast, newPrefix));
                 } else {
@@ -60,6 +66,8 @@ function getFieldSet(context, asts = context.fieldASTs || context.fieldNodes, pr
     }, {});
 }
 
-module.exports = function getFieldList(context) {
-    return Object.keys(getFieldSet(context));
+function getFieldList(context) {
+    return getFieldSet(context);
 };
+
+export default getFieldList;
